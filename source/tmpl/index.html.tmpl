@@ -1,0 +1,127 @@
+<%= include('includes/top.tmpl') %>
+
+    <div class="main">
+
+		<!-- 11647 markup -->
+		<div id="ns_11647" class="ns_11647">
+		    <h2>See cancer survival and waiting times for cancer treatment in your area</h2>
+		    <div class="ns_11647_locatorInputHolder">
+		            <input type="text" name="ns__searchfield" id="ns_11647_postcodeInput" value="" placeholder="Enter your postcode" title="Enter your postcode" maxlength="75" autocomplete="off" class="ns_11647_postcodeInput">
+		            <img src="http://news.bbcimg.co.uk/news/special/2015/newsspec_11647/img/magnify_glass.png?v=1.02" class="ns_11647_searchIcon" id="ns_11647_searchIcon">
+		    </div>
+		    <p id="ns_11647_postcodeError" class="ns_11647_postcodeError" style="display:none;">Please enter a valid UK postcode</p>
+		    <p class="ns_11647_explainer">Entering your postcode will redirect you to the Cancer Research UK website</p>
+		</div>
+
+
+    </div>
+
+    <script>
+    /*
+		 * Varibales
+		*/
+		var postcodeInputEl = document.getElementById('ns_11647_postcodeInput');
+		var postcodeSerarchIconEl = document.getElementById('ns_11647_searchIcon');
+		var postcodeErrorEl = document.getElementById('ns_11647_postcodeError');
+		var ukPostcodeRegex = /^(([gG][iI][rR] {0,}0[aA]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$/gi;
+		var isPostcodeErrorMsgVisible = false;
+
+		/*
+		 * listeners - keyup
+		*/
+		if (typeof postcodeInputEl.addEventListener != "undefined") {
+		    postcodeInputEl.addEventListener("submit", function(evt) {
+		        evt.stopPropagation();
+		        return false;
+		    }, false);
+
+		    postcodeInputEl.addEventListener("keyup", function(evt) {
+		        //has the enter key been pressed?
+		        evt.stopPropagation();
+		        if (evt.keyCode == 13) {
+		        	if (validatePostcodeInput(postcodeInputEl.value)) {
+		        		//the postcode input value has passed validation
+		        		postcodeValidationPassed(postcodeInputEl.value);
+		        	}
+		        	else {
+		        		//the postcode input value has failed validation
+		        		postcodeValidationFailed();
+		        	}
+		        }
+		        else if (isPostcodeErrorMsgVisible) {
+		        	postcodeErrorEl.style.display = 'none';
+					isPostcodeErrorMsgVisible = false;
+		        }
+		    }, false);
+		} else if (typeof postcodeInputEl.attachEvent != "undefined") {
+		    postcodeInputEl.attachEvent("onkeyup", function(evt) {
+		        //has the enter key been pressed?
+		        if (evt.keyCode == 13) {
+		        	if (validatePostcodeInput(postcodeInputEl.value)) {
+		        		//the postcode input value has passed validation
+		        		postcodeValidationPassed(postcodeInputEl.value);
+		        	}
+		        	else {
+		        		//the postcode input value has failed validation
+		        		postcodeValidationFailed();
+		        	}
+		        }
+		        else if (isPostcodeErrorMsgVisible) {
+		        	postcodeErrorEl.style.display = 'none';
+					isPostcodeErrorMsgVisible = false;
+		        }
+		    });
+		}
+
+		/*
+		 * listeners - click
+		*/
+		if (typeof postcodeSerarchIconEl.addEventListener != "undefined") {
+		    postcodeSerarchIconEl.addEventListener("click", function(evt) {
+		    	if (validatePostcodeInput(postcodeInputEl.value)) {
+		    		//the postcode input value has passed validation
+		    		postcodeValidationPassed(postcodeInputEl.value);
+		    	}
+		    	else {
+		    		//the postcode input value has failed validation
+		    		postcodeValidationFailed();
+		    	}
+		    }, false);
+		} else if (typeof postcodeSerarchIconEl.attachEvent != "undefined") {
+		    postcodeSerarchIconEl.attachEvent("click", function(evt) {
+		    	if (validatePostcodeInput(postcodeInputEl.value)) {
+		    		//the postcode input value has passed validatio
+		    		postcodeValidationPassed(postcodeInputEl.value);
+		    	}
+		    	else {
+		    		//the postcode input value has failed validation
+		    		postcodeValidationFailed();
+		    	}
+		    });
+		}
+
+		/*
+		 * functions
+		*/
+		function validatePostcodeInput(inputStr) {
+
+			if (inputStr.match(ukPostcodeRegex)) {
+				return true;
+			}
+
+			return false;
+		}
+
+		function postcodeValidationPassed(validPostcodeStr) {
+			var urlEncodePostcode = encodeURIComponent(validPostcodeStr);
+			var targetURL = 'http://www.cancerresearchuk.org/cancer-info/cancerstats/local-cancer-statistics/?location-name-1=' + urlEncodePostcode + '&location-1=' + urlEncodePostcode;
+			window.parent.location.href = targetURL;
+		}
+
+		function postcodeValidationFailed() {
+			postcodeErrorEl.style.display = 'block';
+			isPostcodeErrorMsgVisible = true;
+		}
+    </script>
+
+<%= include('includes/bottom.tmpl') %>

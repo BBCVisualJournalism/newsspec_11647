@@ -1,0 +1,65 @@
+/* separate your sass into different files to keep it maintainable!  */
+.main { 
+
+    .ns_11647 {
+        max-width: 976px;
+        margin: 0 auto;
+        padding: 8px;
+        background-color: #e1dfe0;
+        font-size: 16px;
+        font-family: Helmet,Freesans,Helvetica,Arial,sans-serif;
+    }
+
+    .ns_11647 h2 {
+        font-size: 1.3em;
+        margin: 0;
+        padding: 0;
+        color: #404040;
+        line-height: 1.5em;
+        font-weight: normal;
+
+    }
+
+    .ns_11647_postcodeError {
+        color: rgb(187, 25, 25);
+        font-size: 1em;
+        line-height: 1.3em;
+    }
+
+    .ns_11647_explainer {
+        color: #666;
+        font-size: 1em;
+        line-height: 1.3em;
+    }
+
+    .ns_11647_locatorInputHolder {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+        margin-top: 1em;
+    }
+
+    .ns_11647_postcodeInput {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+
+        border: 1px solid #fff;
+        color: #6B7875;
+        width:100%;
+        padding:8px 30px 8px 10px;
+        font-family: inherit;
+        font-size: 100%;
+        margin: 0;
+    }
+
+    .ns_11647_searchIcon {
+        position: absolute;
+        width:22px;
+        height:auto;
+        top:6px;
+        right:6px;
+        cursor: pointer;
+    }
+
+}
