@@ -166,10 +166,6 @@
         },
 
         getAnyInstructionsFromIframe: function () {
-            if (this.data.hostPageCallback) {
-                /* jshint evil:true */
-                (new Function(this.data.hostPageCallback)());
-            }
         },
 
         getPath: function (url) {
